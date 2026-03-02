@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños, Dulce Amor mio  🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Sacramento&family=Josefin+Sans:wght@200;300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e8a0b4;
+    --deep-rose: #c2597a;
+    --blush: #f5dde8;
+    --cream: #fdf8f2;
+    --gold: #d4a853;
+    --dark: #2a1a22;
+    --muted: #8b6070;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--dark);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--cream);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── PANTALLA DE BIENVENIDA ── */
+  #welcome-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: radial-gradient(ellipse at 50% 40%, #4a1a2e 0%, #2a1a22 60%, #1a1018 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    transition: opacity .9s ease, visibility .9s ease;
+  }
+  #welcome-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .welcome-heart {
+    font-size: 4rem;
+    display: block;
+    animation: heartbeat 1.3s ease-in-out infinite;
+    margin-bottom: 1.5rem;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%       { transform: scale(1.2); }
+    28%       { transform: scale(1); }
+    42%       { transform: scale(1.15); }
+    56%       { transform: scale(1); }
+  }
+  .welcome-title {
+    font-family: 'Sacramento', cursive;
+    font-size: clamp(2rem, 8vw, 4rem);
+    color: #fff;
+    text-shadow: 0 0 40px rgba(232,160,180,.5);
+    line-height: 1.1;
+    margin-bottom: .5rem;
+  }
+  .welcome-sub {
+    font-family: 'Sacramento', cursive;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--rose);
+    margin-bottom: 2.5rem;
+  }
+  #enter-btn {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: .75rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--dark);
+    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 24px rgba(194,89,122,.5);
+    transition: transform .2s, box-shadow .2s;
+    animation: pulse-btn 2s ease-in-out infinite;
+  }
+  #enter-btn:hover { transform: scale(1.07); box-shadow: 0 6px 32px rgba(194,89,122,.7); }
+  @keyframes pulse-btn {
+    0%, 100% { box-shadow: 0 4px 24px rgba(194,89,122,.5); }
+    50%       { box-shadow: 0 4px 40px rgba(194,89,122,.9); }
+  }
+  .welcome-note {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: .6rem;
+    letter-spacing: .2em;
+    color: var(--muted);
+    margin-top: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  /* ── PARTICLES ── */
+  #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .petal { position: absolute; width: 10px; height: 10px; border-radius: 50% 0 50% 0; opacity: 0; animation: fall linear infinite; }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10%  { opacity: .8; }
+    90%  { opacity: .5; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  #hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; z-index: 1; background: radial-gradient(ellipse at 50% 40%, #4a1a2e 0%, #2a1a22 60%, #1a1018 100%); }
+  .glow-ring { position: absolute; width: 380px; height: 380px; border-radius: 50%; border: 1px solid rgba(232,160,180,.18); box-shadow: 0 0 60px 10px rgba(194,89,122,.12); animation: pulse 4s ease-in-out infinite; pointer-events: none; }
+  .glow-ring:nth-child(2) { width: 480px; height: 480px; animation-delay: 1s; opacity: .5; }
+  .glow-ring:nth-child(3) { width: 580px; height: 580px; animation-delay: 2s; opacity: .3; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); opacity: .6; } 50% { transform: scale(1.05); opacity: 1; } }
+  .hero-sub { font-family: 'Sacramento', cursive; font-size: clamp(1.4rem, 4vw, 2.2rem); color: var(--rose); letter-spacing: .05em; opacity: 0; animation: fadeUp .8s ease forwards .3s; }
+  .hero-title { font-family: 'Sacramento', cursive; font-size: clamp(3rem, 12vw, 7rem); color: #fff; line-height: 1; margin: .2em 0 .1em; text-shadow: 0 0 40px rgba(232,160,180,.5); opacity: 0; animation: fadeUp .9s ease forwards .6s; }
+  .hero-name { font-family: 'Sacramento', cursive; font-size: clamp(2rem, 8vw, 4.5rem); color: var(--rose); text-shadow: 0 0 30px rgba(232,160,180,.6); opacity: 0; animation: fadeUp .9s ease forwards .9s; }
+  .hero-date { font-family: 'Josefin Sans', sans-serif; font-size: .75rem; letter-spacing: .35em; color: var(--muted); text-transform: uppercase; margin-top: 1.5rem; opacity: 0; animation: fadeUp .8s ease forwards 1.2s; }
+  .scroll-hint { position: absolute; bottom: 2.5rem; font-family: 'Josefin Sans', sans-serif; font-size: .65rem; letter-spacing: .3em; color: var(--muted); opacity: 0; animation: fadeUp .8s ease forwards 2s, bobble 2s ease-in-out infinite 3s; }
+  .scroll-hint::after { content: ' ↓'; }
+  @keyframes bobble { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+
+  section { position: relative; z-index: 1; padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem); }
+  .section-label { font-family: 'Josefin Sans', sans-serif; font-size: .65rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+
+  #carta { background: linear-gradient(135deg, #1e1018 0%, #2e1525 50%, #1a0f1a 100%); border-top: 1px solid rgba(232,160,180,.1); }
+  .carta-wrapper { max-width: 780px; margin: 0 auto; }
+  .carta-envelope { text-align: center; margin-bottom: 3rem; opacity: 0; transform: translateY(30px); transition: opacity .9s ease, transform .9s ease; }
+  .carta-envelope.visible { opacity: 1; transform: translateY(0); }
+  .envelope-icon { font-size: 3.5rem; display: block; animation: flutter 3s ease-in-out infinite; }
+  @keyframes flutter { 0%, 100% { transform: rotate(-3deg) scale(1); } 50% { transform: rotate(3deg) scale(1.08); } }
+  .carta-title { font-family: 'Sacramento', cursive; font-size: clamp(2.2rem, 6vw, 3.5rem); color: var(--rose); line-height: 1.1; margin-bottom: .5em; }
+  .carta-body { font-size: clamp(1.1rem, 2.5vw, 1.3rem); line-height: 1.9; color: #e8d5dc; font-style: italic; font-weight: 300; }
+  .carta-body p { margin-bottom: 1.6em; }
+  .carta-body p.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+  .carta-body p.reveal.visible { opacity: 1; transform: translateY(0); }
+  .firma { text-align: right; font-family: 'Sacramento', cursive; font-size: 2rem; color: var(--rose); margin-top: 2rem; opacity: 0; transition: opacity 1s ease .3s; }
+  .firma.visible { opacity: 1; }
+  .divider { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--rose), transparent); margin: 3rem auto; }
+
+  #promesas { background: linear-gradient(180deg, #1a0f1a 0%, #0f0a10 100%); }
+  .promesas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; max-width: 1000px; margin: 2rem auto 0; }
+  .promesa-card { background: rgba(255,255,255,.03); border: 1px solid rgba(232,160,180,.12); border-radius: 2px; padding: 2rem 1.8rem; position: relative; overflow: hidden; opacity: 0; transform: translateY(30px) scale(.97); transition: opacity .7s ease, transform .7s ease, border-color .3s; }
+  .promesa-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+  .promesa-card:hover { border-color: rgba(232,160,180,.4); }
+  .promesa-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(to bottom, var(--rose), var(--deep-rose)); }
+  .promesa-icon { font-size: 1.8rem; margin-bottom: .8rem; display: block; }
+  .promesa-title { font-family: 'Sacramento', cursive; font-size: 1.6rem; color: var(--rose); margin-bottom: .5rem; }
+  .promesa-text { font-size: 1rem; color: #c4a8b2; line-height: 1.7; font-weight: 300; }
+
+  #candles { text-align: center; background: #0f0a10; padding-bottom: 5rem; }
+  .cake-wrapper { position: relative; display: inline-block; margin: 2rem 0; }
+  .cake { font-size: clamp(5rem, 15vw, 10rem); display: block; filter: drop-shadow(0 0 30px rgba(232,160,180,.4)); animation: cakeFloat 3s ease-in-out infinite; }
+  @keyframes cakeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .sparkles { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+  .spark { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); animation: sparkle 1.5s ease-in-out infinite; }
+  @keyframes sparkle { 0% { transform: translate(0,0) scale(0); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; } }
+  .wish-text { font-family: 'Sacramento', cursive; font-size: clamp(2rem, 6vw, 3.5rem); color: #fff; text-shadow: 0 0 30px rgba(232,160,180,.6); opacity: 0; transition: opacity 1s ease; }
+  .wish-text.visible { opacity: 1; }
+  .wish-sub { font-family: 'Josefin Sans', sans-serif; font-size: .8rem; letter-spacing: .25em; color: var(--muted); margin-top: .5rem; text-transform: uppercase; }
+
+  #cierre { text-align: center; background: radial-gradient(ellipse at bottom, #3d1228 0%, #0f0a10 70%); min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .cierre-heart { font-size: 4rem; display: block; animation: heartbeat 1.3s ease-in-out infinite; margin-bottom: 1.5rem; }
+  .cierre-main { font-family: 'Sacramento', cursive; font-size: clamp(2.5rem, 8vw, 5rem); color: var(--rose); text-shadow: 0 0 40px rgba(232,160,180,.5); line-height: 1.1; }
+  .cierre-sub { font-family: 'Josefin Sans', sans-serif; font-size: .7rem; letter-spacing: .5em; color: var(--muted); margin-top: 1rem; text-transform: uppercase; }
+
+  /* ── MUSIC BUTTON (solo apagar) ── */
+  #music-btn {
+    position: fixed;
+    bottom: 1.8rem; right: 1.8rem;
+    z-index: 9998;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: rgba(194,89,122,.85);
+    border: 1px solid rgba(232,160,180,.4);
+    color: #fff; font-size: 1.3rem;
+    cursor: pointer;
+    display: none; /* oculto hasta que entre */
+    align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(194,89,122,.4);
+    transition: transform .2s, box-shadow .2s;
+    backdrop-filter: blur(8px);
+  }
+  #music-btn.visible { display: flex; }
+  #music-btn:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(194,89,122,.6); }
+  #music-btn.playing { animation: spin-slow 3s linear infinite; }
+  @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .confetti-piece { position: fixed; width: 8px; height: 12px; top: -20px; opacity: 0; animation: confettiFall linear forwards; pointer-events: none; z-index: 9997; border-radius: 2px; }
+  @keyframes confettiFall { 0% { transform: translateY(0) rotateX(0) rotateZ(0); opacity: 1; } 100% { transform: translateY(110vh) rotateX(360deg) rotateZ(720deg); opacity: 0; } }
+
+  @media (max-width: 600px) {
+    .promesas-grid { grid-template-columns: 1fr; }
+    #music-btn { bottom: 1rem; right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── ARCHIVO DE MÚSICA: pon tu canción en la misma carpeta y cambia "amor.mp3" por el nombre de tu archivo ── -->
+<audio id="bg-music" loop preload="auto">
+  <source src="amor.mp3" type="audio/mpeg">
+  <source src="amor.ogg" type="audio/ogg">
+</audio>
+
+<!-- PANTALLA DE BIENVENIDA -->
+<div id="welcome-screen">
+  <span class="welcome-heart">🌸</span>
+  <h1 class="welcome-title">Para ti, Dulce Amor</h1>
+  <p class="welcome-sub">Tengo algo especial que mostrarte...</p>
+  <button id="enter-btn">✨ Abrir mi sorpresa ✨</button>
+  <p class="welcome-note">Toca para entrar y escuchar</p>
+</div>
+
+<div id="particles"></div>
+<button id="music-btn" title="Apagar música" aria-label="Apagar música">🎶</button>
+
+<section id="hero">
+  <div class="glow-ring"></div>
+  <div class="glow-ring"></div>
+  <div class="glow-ring"></div>
+  <p class="hero-sub">Con todo el amor del mundo, para ti</p>
+  <h1 class="hero-title">Feliz Cumpleaños</h1>
+  <h2 class="hero-name">Dulce Amor del Alma ✨</h2>
+  <p class="hero-date">Mi primer cumpleaños tuyo — Tu día más especial para ti y para mi</p>
+  <p class="scroll-hint">Sigue leyendo</p>
+</section>
+
+<section id="carta">
+  <div class="carta-wrapper">
+    <div class="carta-envelope"><span class="envelope-icon">💌</span></div>
+    <div style="text-align:center; margin-bottom:3rem;">
+      <p class="section-label">Mi carta para ti</p>
+      <h3 class="carta-title">Dulce Corazón, hoy es tu día</h3>
+    </div>
+    <div class="carta-body">
+      <p class="reveal">Hoy, donde sea que estés en el mundo, quiero que sepas que mi corazón viaja hasta ti. La distancia existe en los mapas, pero nunca entre nosotros. Desde aqui, con cada pensamiento, con cada suspiro, te mando todo mi amor envuelto en unos abrazotess que hice especialmente para ti.</p>
+      <p class="reveal">Dulce amada, tu nombre lo describe todo: eres dulzura en cada gesto, en cada risa, en cada palabra que me das. Eres mi vida, mi paz, mi lugar seguro. El día que llegaste a mi vida, todo se llenó de un color que yo ni siquiera sabía que existía.</p>
+      <p class="reveal">Hoy cumples años y el universo tiene razón de celebrar — porque tú eres uno de sus mejores regalos. No solo para mí, sino para todos los que tienen la fortuna de conocerte y sentir tu luz.</p>
+      <p class="reveal">Quiero que este día sea tuyo por completo. Que sonrías sin razón, que bailes aunque no haya música, y que sientas profundamente en el corazón que tienes a alguien en este mundo que piensa en ti absolutamente todo el tiempo.</p>
+    </div>
+    <div class="divider"></div>
+    <p class="firma">Con amor infinito — siempre tuyo 🌸</p>
+  </div>
+</section>
+
+<section id="promesas">
+  <div style="text-align:center; margin-bottom:1rem;">
+    <p class="section-label">Lo que te prometo</p>
+    <h3 class="carta-title" style="font-size:clamp(2rem,5vw,3rem);">Mi futuro contigo</h3>
+  </div>
+  <div class="promesas-grid">
+    <div class="promesa-card"><span class="promesa-icon">✈️</span><p class="promesa-title">Acabar con la distancia</p><p class="promesa-text">Cada día que pasa es un día menos lejos. Te prometo que haré todo lo que esté en mis manos para estar donde tú estés.</p></div>
+    <div class="promesa-card"><span class="promesa-icon">🌅</span><p class="promesa-title">Construir juntos</p><p class="promesa-text">Sueño con despertarme a tu lado, construir nuestra vida juntos, paso a paso, ladrillo a ladrillo, con amor y con paciencia.</p></div>
+    <div class="promesa-card"><span class="promesa-icon">💪</span><p class="promesa-title">Apoyo incondicional</p><p class="promesa-text">En cada meta que te propongas, en cada caída y en cada logro, aquí estoy. Soy tu más grande fanático y siempre lo seré.</p></div>
+    <div class="promesa-card"><span class="promesa-icon">🌙</span><p class="promesa-title">Noches de calma</p><p class="promesa-text">Prometo ser tu refugio, el lugar al que siempre puedas volver. Contigo quiero la calma y la certeza de un amor que no se va.</p></div>
+    <div class="promesa-card"><span class="promesa-icon">:)</span><p class="promesa-title">Hacerte reír siempre</p><p class="promesa-text">Esa risa tuya es mi canción favorita. Me comprometo a buscarte la sonrisa todos los días aunque tenga que hacer el ridículo.</p></div>
+    <div class="promesa-card"><span class="promesa-icon">D + M</span><p class="promesa-title">Un futuro real</p><p class="promesa-text">Esto no es solo hoy. Es cada cumpleaños por venir, cada año que avanzamos juntos. Eres la persona con quien quiero enfrentar la vida.</p></div>
+  </div>
+</section>
+
+<section id="candles">
+  <p class="section-label" style="text-align:center;">Pide un deseo</p>
+  <div class="cake-wrapper">
+    <span class="cake">🎂</span>
+    <div class="sparkles" id="sparkles"></div>
+  </div>
+  <div class="wish-text" id="wishText">¡Que todos tus sueños se hagan realidad!</div>
+  <p class="wish-sub">Sopla las velitas, Dulce DE MI LIFE 🎉</p>
+</section>
+
+<section id="cierre">
+  <span class="cierre-heart">❤️</span>
+  <h2 class="cierre-main">Te amo, Dulce y no sabes cuanto</h2>
+  <p class="cierre-sub">Desde mi corazon a la distancia — para ti mi amor lindota</p>
+</section>
+
+<script>
+// ── PETALS
+const colors = ['#e8a0b4','#c2597a','#f5dde8','#d4a853','#f8c8d8'];
+const container = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*10}s;border-radius:${Math.random()>.5?'50% 0 50% 0':'50%'};`;
+  container.appendChild(p);
+}
+
+// ── SPARKLES
+const sp = document.getElementById('sparkles');
+for (let i = 0; i < 14; i++) {
+  const s = document.createElement('div');
+  s.className = 'spark';
+  const angle = (360/14)*i, rad = angle*(Math.PI/180), dist = 40+Math.random()*30;
+  s.style.cssText = `left:${50+Math.cos(rad)*dist}%;top:${50+Math.sin(rad)*dist}px;--dx:${Math.cos(rad)*60}px;--dy:${Math.sin(rad)*60}px;animation-delay:${Math.random()*1.5}s;animation-duration:${1.2+Math.random()*.6}s;background:${Math.random()>.5?'#d4a853':'#e8a0b4'};`;
+  sp.appendChild(s);
+}
+
+// ── REVEAL ON SCROLL
+const reveals = document.querySelectorAll('.reveal, .carta-envelope, .promesa-card, .wish-text, .firma');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const siblings = [...el.parentElement.children].filter(c => c.classList.contains(el.classList[0]));
+      setTimeout(() => el.classList.add('visible'), siblings.indexOf(el) * 120);
+      io.unobserve(el);
+    }
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => io.observe(el));
+
+// ── CONFETTI
+const confettiColors = ['#e8a0b4','#c2597a','#d4a853','#f8f4e6','#a0c4e8','#f5dde8'];
+function burst() {
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.cssText = `left:${Math.random()*100}vw;background:${confettiColors[Math.floor(Math.random()*confettiColors.length)]};animation-duration:${2.5+Math.random()*2.5}s;animation-delay:${Math.random()*1.5}s;width:${6+Math.random()*8}px;height:${8+Math.random()*10}px;transform:rotate(${Math.random()*360}deg);`;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 6000);
+  }
+}
+
+// ── MÚSICA + PANTALLA DE BIENVENIDA
+const audio     = document.getElementById('bg-music');
+const btn       = document.getElementById('music-btn');
+const welcome   = document.getElementById('welcome-screen');
+const enterBtn  = document.getElementById('enter-btn');
+let musicOn = true;
+
+audio.volume = 0.5;
+
+enterBtn.addEventListener('click', () => {
+  // Arrancar música (aquí el navegador ya tiene interacción del usuario → funciona siempre)
+  audio.play();
+
+  // Ocultar pantalla de bienvenida
+  welcome.classList.add('hide');
+
+  // Mostrar botón de música
+  btn.classList.add('visible', 'playing');
+
+  // Confetti de celebración
+  setTimeout(burst, 400);
+  setTimeout(burst, 2000);
+});
+
+// Botón: solo apagar / volver a encender
+btn.addEventListener('click', () => {
+  if (musicOn) {
+    audio.pause();
+    musicOn = false;
+    btn.textContent = '🔇';
+    btn.classList.remove('playing');
+  } else {
+    audio.play();
+    musicOn = true;
+    btn.textContent = '🎶';
+    btn.classList.add('playing');
+  }
+});
+</script>
+</body>
+</html>
